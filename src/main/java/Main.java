@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         //  spausdintiStudentoInf();
-         uzkrautiDuomenis();
-//        kursoVidurkis(2018);
+        uzkrautiDuomenis();
+        kursoVidurkis(2018);
     }
 
     static void spausdintiStudentoInf() {

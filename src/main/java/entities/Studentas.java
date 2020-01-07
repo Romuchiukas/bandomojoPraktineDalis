@@ -24,18 +24,6 @@ public class Studentas {
     @OneToMany(mappedBy = "studentas", fetch = FetchType.EAGER)
     private List<Pazymys> pazymiai;
 
-    // nereikalingas
-//    public Studentas() {
-//    }
-//
-//    public Studentas(Integer id, String vardas, String pavarde, String elPastas, List<Pazymys> pazymiai) {
-//        this.id = id;
-//        this.vardas = vardas;
-//        this.pavarde = pavarde;
-//        this.elPastas = elPastas;
-//        this.pazymiai = pazymiai;
-//    }
-
     public int getId() {
         return id;
     }
@@ -75,16 +63,5 @@ public class Studentas {
     public void setPazymiai(List<Pazymys> pazymiai) {
         this.pazymiai = pazymiai;
     }
-
-    //nereikalingas
-//    @Override
-//    public String toString() {
-//        return "Studentas{" +
-//                "id -" + id +
-//                ", vardas -'" + vardas + '\'' +
-//                ", pavarde -'" + pavarde + '\'' +
-//                ", elPastas -'" + elPastas + '\'' +
-//                ", pazymiai -" + pazymiai +
-//                '}';
-//    }
+    
 }

@@ -3,14 +3,15 @@ import entities.Studentas;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        spausdintiStudentoInf();
+//        spausdintiStudentoInf();
         uzkrautiDuomenis();
-        kursoVidurkis(2018);
+//        kursoVidurkis(2018);
     }
 
     static void spausdintiStudentoInf() {
@@ -27,13 +28,15 @@ public class Main {
 
         EntityManager em = HibernateUtils.getEntityManager();
         em.getTransaction().begin();
-        Query q = em.createNativeQuery("SELECT * FROM db_dienynas.studentai ORDER BY pavarde", Studentas.class);
+        //Query q = em.createNativeQuery("SELECT * FROM db_dienynas.studentai ORDER BY pavarde", Studentas.class);
+
+        Query q = em.createNativeQuery("SELECT * FROM db_dienynas.studentai LEFT JOIN db_dienynas.pazymiai ON pazymiai.studentas_id = studentai.id", Studentas.class);
 
         List<Studentas> studentai = q.getResultList();
 
         for (Studentas s : studentai){
-            System.out.println(" Studentas: id - " + s.getId() + " "
-                    + s.getPavarde() + " " + s.getVardas());
+            System.out.println("\n Studentas: id - " + s.getId() + ", "
+                    + s.getPavarde() + " " + s.getVardas() + ", el.pastas - " + s.getElPastas() + " \n" + s.getPazymiai());
         }
 
         System.out.println(" ----> " + studentai.size() + " " + studentai.getClass());
@@ -44,7 +47,8 @@ public class Main {
         EntityManager em = HibernateUtils.getEntityManager();
         em.getTransaction().begin();
 
-        List<Pazymys> pazymiai = em.createQuery("from Pazymys").getResultList();
+        List<Pazymys> pazymiai = new ArrayList<>();
+        pazymiai  = em.createQuery("from Pazymys").getResultList();
 
        // List<Pazymys> pazymiai = q.getResultList();
 
@@ -55,6 +59,7 @@ public class Main {
 
         System.out.println("Kurso vidurkis --> " + avg);
 
-        //System.out.println(pazymiai.size() + " " +  pazymiai.getClass());
+        System.out.println(pazymiai.size() + " " +  pazymiai.getClass());
+        em.getTransaction().commit();
     }
 }

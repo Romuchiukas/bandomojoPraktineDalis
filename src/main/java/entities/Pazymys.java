@@ -18,11 +18,11 @@ public class Pazymys {
     @Column(name="data")
     private LocalDate data;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="studentas_id", nullable=false)
     private Studentas studentas;
 
-    public int getPazymysId() {
+     public int getPazymysId() {
         return pazymysId;
     }
 
@@ -52,5 +52,10 @@ public class Pazymys {
 
     public void setStudentas(Studentas studentas) {
         this.studentas = studentas;
+    }
+
+    @Override
+    public String toString() {
+        return "\n Pazymys, data " + pazymys + data + " ";
     }
 }

@@ -9,7 +9,7 @@ public class Pazymys {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     private int pazymysId;
 
     @Column(name = "pazymys")
@@ -18,11 +18,22 @@ public class Pazymys {
     @Column(name="data")
     private LocalDate data;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="studentas_id", nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "studentas_id")
     private Studentas studentas;
 
-     public int getPazymysId() {
+
+    public Pazymys() {
+    }
+
+    public Pazymys(int pazymysId, int pazymys, LocalDate data, Studentas studentas) {
+        this.pazymysId = pazymysId;
+        this.pazymys = pazymys;
+        this.data = data;
+        this.studentas = studentas;
+    }
+
+    public int getPazymysId() {
         return pazymysId;
     }
 
@@ -46,6 +57,7 @@ public class Pazymys {
         this.data = data;
     }
 
+
     public Studentas getStudentas() {
         return studentas;
     }
@@ -56,6 +68,8 @@ public class Pazymys {
 
     @Override
     public String toString() {
-        return "\n Pazymys, data " + pazymys + data + " ";
+        return " " + pazymys + " - " + data + " ";
     }
+
+
 }
